@@ -1,3 +1,7 @@
+# Deploy
+
+You can view the [demo](https://github.com/joanpuigra/Dont-be-afraid).
+
 # Installation
 
 Clone the git repository
