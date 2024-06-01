@@ -1,19 +1,23 @@
 import kaboom from 'kaboom'
 
 // #region Initialize Kaboom
+
 const k = kaboom({
+  scale: 2,
+  // width: 640 * 2,
+  // height: 360 * 2,
   global: true,
   fullscreen: true,
-  scale: 2,
   debug: true,
-  debugKey: 'f1',
-  clearColor: [0, 0, 0, 1],
+  // debugKey: 'f1',
+  // clearColor: [0, 0, 0, 1],
   background: [0, 0, 0],
 })
 // #endregion
 
 // #region Load Assets
 const loadSprites = () => {
+  // Background
   k.loadSprite('background', 'assets/background.png')
 
   // Items
@@ -32,6 +36,10 @@ const loadSprites = () => {
   k.loadSprite('ground_1', 'assets/sprites/tileset/Ground_1.png')
   k.loadSprite('ground_2', 'assets/sprites/tileset/Ground_2.png')
   k.loadSprite('ground_3', 'assets/sprites/tileset/Ground_3.png')
+}
+
+const loadMenu = () => {
+  k.loadSprite('menu', 'assets/menu.png')
 }
 
 // Player
@@ -56,6 +64,10 @@ const loadSounds = () => {
 }
 // #endregion
 
+const SPEED = 320
+const JUMP = 350
+setGravity(1200)
+
 // #region Map
 const levels = [
   [
@@ -64,13 +76,41 @@ const levels = [
   ],
   ['  @                ', '<=>'],
 ]
+// #endregion
 
-// Scene
+// #region Scene
+k.scene('menu', () => {
+  loadMenu()
+
+  onResize = () => {
+    k.width(window.innerWidth)
+    k.height(window.innerHeight)
+  }
+
+  add([
+    k.sprite('menu'),
+    k.pos(0, 180),
+    k.scale(0.5),
+    k.width(),
+    k.height(),
+    k.anchor('left'),
+  ])
+
+  add([
+    k.text(
+      'Press space to start',
+      k.width() / 2,
+      k.height() / 2,
+      k.anchor('center'),
+    ),
+  ])
+})
+
 k.scene('main', () => {
   // Init
-  const SPEED = 320
-  const JUMP = 350
-  setGravity(1200)
+  // const SPEED = 320
+  // const JUMP = 350
+  // setGravity(1200)
 
   // Load assets
   loadSprites()
@@ -88,7 +128,7 @@ k.scene('main', () => {
   k.play('music', { loop: true })
   volume(0.5)
 
-  // Add level
+  // #region Add level
   const level = addLevel(levels[0], {
     tileWidth: 128,
     tileHeight: 128,
@@ -200,7 +240,7 @@ k.scene('main', () => {
   const player = level.get('player')[0]
 
   // Player animations
-  player.play('idle')
+  // player.play('idle')
 
   player.onUpdate(() => {
     camPos(player.worldPos())
@@ -234,5 +274,6 @@ k.scene('main', () => {
   })
   // #endregion
 })
+// #endregion
 
-k.go('main')
+k.go('menu')
