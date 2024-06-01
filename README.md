@@ -1,8 +1,13 @@
-# Deploy
+# Don't be Afraid
+Don't be afraid it's a videogame created using Kaboomjs library, made with javascript. It's a school project still in development, it will be a full game later on.
+
+It's a sidescroll game about a little girl lost in a dark cementery, surrounded by undead. All she has is a little lantern to take away the shadows, but it will be enought? Try it for yourself.
+
+## Live Demo
 
 You can view the [demo](https://github.com/joanpuigra/Dont-be-afraid).
 
-# Installation
+## Installation
 
 Clone the git repository
 
