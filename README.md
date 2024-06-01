@@ -1,27 +1,44 @@
-# Folder structure
+# Installation
 
-- `src` - source code for your kaboom project
-- `www` - distribution folder, contains your index.html, built js bundle and static assets
+Clone the git repository
 
+```sh
+git clone https://github.com/joanpuigra/Dont-be-afraid.git
+```
+
+## Dependencies
+
+- Kaboom v3000.1.17
+- Esbuild v0.21.3 (only to run development environment)
+
+We need to have a running node environment.
+
+```sh
+npm install
+```
 
 ## Development
 
+To start a developer build you need to install `esbuild` with `npm install esbuild`.
+
 ```sh
-$ npm run dev
+npm run dev
 ```
 
-will start a dev server at http://localhost:8000
+Will start a dev server at <http://localhost:8000>
 
 ## Distribution
 
-```sh
-$ npm run build
-```
-
-will build your js files into `www/main.js`
+To build your js files into `www/main.js`
 
 ```sh
-$ npm run bundle
+npm run build
 ```
 
-will build your game and package into a .zip file, you can upload to your server or itch.io / newground etc.
+To create a bundle for distribution or deployment.
+
+```sh
+npm run bundle
+```
+
+Will build the game and package into a .zip file.
