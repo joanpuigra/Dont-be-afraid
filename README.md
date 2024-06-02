@@ -5,8 +5,7 @@
 It's a *sidescroll* game about a **little girl** lost in a dark *cemetery*, surrounded by **undead**. All she has is a little **lantern** to take away the *shadows*, but it will be enough? Try it for yourself.
 
 ## Live Demo
-
-You can view the [demo](https://github.com/joanpuigra/Dont-be-afraid).
+You can view the [demo](https://dont-be-afraid.vercel.app/).
 
 ## Installation
 
