@@ -42,8 +42,9 @@ const initConfig = () => {
 
 // #region Load Assets
 const loadSprites = () => {
-  // Menu
+  // Background
   k.loadSprite('menu', 'assets/menu.png')
+  k.loadSprite('background', 'assets/bg.png')
 
   // Items
   k.loadSprite('tree', 'assets/sprites/items/Tree.png')
@@ -206,7 +207,7 @@ const menu = () => {
     action: () => {
       const continueDialog = addDialog(
         'Option not available yet',
-        k.vec2(350, 350),
+        k.vec2(350, 370),
         600,
         100,
         colors.magenta,
@@ -231,7 +232,7 @@ const menu = () => {
     action: () => {
       const optionsDialog = addDialog(
         'Option not available yet',
-        k.vec2(350, 350),
+        k.vec2(350, 370),
         600,
         100,
         colors.magenta,
@@ -257,7 +258,7 @@ const menu = () => {
     action: () => {
       const exitDialog = addDialog(
         'Even a little girl is more brave than you!',
-        k.vec2(350, 350),
+        k.vec2(350, 370),
         950,
         100,
         colors.magenta,
@@ -279,11 +280,43 @@ const menu = () => {
 }
 // #endregion
 
+const title = () => {
+  k.add([
+    k.text("Don't be"),
+    k.pos(k.width() / 2 + 182, 164),
+    k.scale(1),
+    k.anchor('center'),
+    k.color(colors.pink),
+  ])
+  k.add([
+    k.text("Don't be"),
+    k.pos(k.width() / 2 + 185, 162),
+    k.scale(1),
+    k.anchor('center'),
+    k.color(colors.magenta),
+  ])
+  k.add([
+    k.text('Afraid'),
+    k.pos(k.width() / 2 + 182, 306),
+    k.scale(1),
+    k.anchor('center'),
+    k.color(colors.pink),
+  ])
+  k.add([
+    k.text('Afraid'),
+    k.pos(k.width() / 2 + 185, 304),
+    k.scale(1),
+    k.anchor('center'),
+    k.color(colors.magenta),
+  ])
+}
+
 // #region Scene
 k.scene('menu', () => {
   initConfig()
   k.add([k.sprite('menu'), k.pos(0, 200), k.scale(0.5), k.anchor('left')])
   menu()
+  title()
   //! FIX: Continue dialog and exit are superposed if used at the same time
 })
 
@@ -304,9 +337,7 @@ k.scene('game', () => {
 
   const music = k.play('music', { loop: true, volume: 0.5 })
   k.debug.log('Music playing')
-
-  // add([k.sprite('background'), k.pos(0, 0), scale(2), 'bg'])
-  // const bg = k.get('bg')[0]
+  k.add([k.sprite('background'), k.pos(0, 200), k.scale(0.5), k.anchor('left')])
 
   // #region Add level
   const level = k.addLevel(levels[0], {
@@ -441,6 +472,8 @@ k.scene('game', () => {
   k.onUpdate(() => k.usePostEffect('light', effects.light()))
 
   // Player pos = 158, 237
+  //! FIX: Light shader not following player
+  //? Attach to player like a 'lantern'
 
   player.onUpdate(() => {
     k.camPos(player.worldPos())
@@ -478,7 +511,7 @@ k.scene('game', () => {
   })
   k.onKeyDown('escape', () => {
     music.paused = true
-    k.usePostEffect(null)
+    k.usePostEffect(null) //! FIX: Post effect not removed
     k.go('menu')
   })
   // #endregion
